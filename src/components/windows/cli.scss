@@ -1,0 +1,236 @@
+// ─────────────────────────────────────────────
+//  CLI Terminal — cli.scss  (Pro Hacker Style)
+// ─────────────────────────────────────────────
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+$bg:     #0c0e0f;
+$green:  #39d353;
+$blue:   #58a6ff;
+$yellow: #e3b341;
+$purple: #bc8cff;
+$pink:   #ff79c6;
+$red:    #f85149;
+$cyan:   #56d4dd;
+$text:   #cdd9e5;
+$dim:    #545d68;
+$mid:    #768390;
+$font:   'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+
+.cli-root {
+  font-family: $font;
+  background: $bg;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  cursor: text;
+  font-size: 12.5px;
+  line-height: 1.65;
+  color: $text;
+  position: relative;
+}
+
+.cli-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px 20px 10px;
+
+  &::-webkit-scrollbar       { width: 4px; }
+  &::-webkit-scrollbar-track { background: transparent; }
+  &::-webkit-scrollbar-thumb { background: rgba(57, 211, 83, 0.2); border-radius: 2px; }
+}
+
+// ── Entry + prompt ────────────────────────────
+.cli-entry       { margin-bottom: 2px; }
+.cli-output      { margin: 2px 0 10px 0; }
+
+.cli-prompt-line,
+.cli-input-line  { display: flex; align-items: center; margin-bottom: 2px; }
+
+.cli-p-user  { color: $green; font-weight: 600; }
+.cli-p-at    { color: $dim; }
+.cli-p-host  { color: $blue; font-weight: 500; }
+.cli-p-sep   { color: $dim; white-space: pre; }
+.cli-p-cmd   { color: $text; }
+
+.cli-input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: $text;
+  font-family: $font;
+  font-size: 12.5px;
+  line-height: 1.65;
+  flex: 1;
+  caret-color: $green;
+  padding: 0;
+  &::selection { background: rgba(57,211,83,0.2); }
+}
+
+// ── Boot / banner ─────────────────────────────
+.cli-system {
+  color: $dim;
+  font-size: 11.5px;
+  &::before { content: '[  '; color: $green; opacity: 0.6; }
+  &::after  { content: '  ]'; color: $green; opacity: 0.6; }
+}
+
+.cli-banner {
+  color: $cyan;
+  font-size: 12px;
+  opacity: 0.75;
+  letter-spacing: 0.02em;
+}
+
+// ── Status row ────────────────────────────────
+.cli-status-row {
+  display: flex;
+  gap: 28px;
+  flex-wrap: wrap;
+  padding: 2px 0;
+}
+.cli-status-item { display: flex; flex-direction: column; gap: 1px; }
+.cli-status-label {
+  font-size: 9px;
+  color: $dim;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 600;
+}
+.cli-status-val { font-size: 12px; font-weight: 500; }
+
+// ── Section header ────────────────────────────
+.cli-section {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 6px 0 8px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  color: $green;
+}
+.cli-sec-prefix { opacity: 0.4; }
+.cli-sec-suffix { opacity: 0.25; }
+.cli-sec-text   { letter-spacing: 0.12em; }
+
+// ── Key-value ─────────────────────────────────
+.cli-kv { display: flex; align-items: baseline; gap: 0; margin: 2px 2px; }
+.cli-kv-key { color: $blue; min-width: 80px; font-size: 12px; font-weight: 500; }
+.cli-kv-eq  { color: $dim; }
+.cli-kv-val { color: $text; font-size: 12px; }
+
+// ── Bullet ────────────────────────────────────
+.cli-bullet { display: flex; align-items: flex-start; gap: 10px; margin: 3px 0; padding: 0 2px; }
+.cli-bullet-icon { font-size: 11px; margin-top: 2px; flex-shrink: 0; }
+.cli-bullet-text { color: $mid; font-size: 12px; }
+
+// ── Skill bars ────────────────────────────────
+.cli-skill-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 3px 0;
+  font-size: 12px;
+}
+.cli-skill-label { color: $mid; min-width: 160px; font-size: 11.5px; }
+.cli-skill-filled { font-size: 10px; letter-spacing: -1px; }
+.cli-skill-empty  { color: rgba(255,255,255,0.08); font-size: 10px; letter-spacing: -1px; }
+.cli-skill-pct    { color: $dim; font-size: 11px; min-width: 38px; }
+
+// ── Tag group ─────────────────────────────────
+.cli-tag-group { display: flex; align-items: center; flex-wrap: wrap; gap: 5px; margin: 3px 0; }
+.cli-tag-label { color: $dim; min-width: 60px; font-size: 11.5px; flex-shrink: 0; }
+.cli-tag {
+  padding: 1px 8px;
+  border: 1px solid rgba(57,211,83,0.2);
+  background: rgba(57,211,83,0.05);
+  color: $green;
+  font-size: 11px;
+  border-radius: 3px;
+  transition: all 0.15s;
+  &:hover { background: rgba(57,211,83,0.12); border-color: rgba(57,211,83,0.45); }
+}
+
+// ── Projects ──────────────────────────────────
+.cli-project { padding: 6px 0 4px 14px; border-left: 2px solid rgba(255,255,255,0.07); margin: 4px 0; transition: border-color 0.2s; &:hover { border-color: rgba(57,211,83,0.4); } }
+.cli-project-header { display: flex; align-items: center; gap: 10px; margin-bottom: 3px; }
+.cli-project-num  { color: $dim; font-size: 11px; }
+.cli-project-name { color: $text; font-weight: 600; font-size: 13px; }
+.cli-project-badge {
+  font-size: 10px; padding: 1px 7px; border-radius: 2px;
+  &.cli-badge-green  { border: 1px solid rgba(57,211,83,0.3);  background: rgba(57,211,83,0.08);  color: $green; }
+  &.cli-badge-blue   { border: 1px solid rgba(88,166,255,0.3); background: rgba(88,166,255,0.08); color: $blue; }
+  &.cli-badge-purple { border: 1px solid rgba(188,140,255,0.3);background: rgba(188,140,255,0.08);color: $purple; }
+  &.cli-badge-yellow { border: 1px solid rgba(227,179,65,0.3); background: rgba(227,179,65,0.08); color: $yellow; }
+}
+.cli-project-tech { color: $blue; font-size: 11px; margin-bottom: 3px; opacity: 0.75; }
+.cli-project-desc { color: $mid; font-size: 11.5px; line-height: 1.5; }
+
+// ── Timeline ──────────────────────────────────
+.cli-timeline { display: flex; align-items: flex-start; gap: 12px; margin: 4px 0; }
+.cli-tl-year  { color: $yellow; min-width: 50px; font-size: 11.5px; font-weight: 600; }
+.cli-tl-pipe  { color: $dim; }
+.cli-tl-text  { color: $mid; font-size: 11.5px; }
+
+// ── Contact rows ──────────────────────────────
+.cli-contact-row {
+  display: flex; align-items: center; gap: 10px; margin: 3px 0;
+  padding: 5px 12px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 4px;
+  transition: all 0.15s;
+  &:hover { background: rgba(57,211,83,0.04); border-color: rgba(57,211,83,0.15); }
+}
+.cli-cr-icon  { color: $green; font-size: 12px; width: 16px; text-align: center; }
+.cli-cr-label { color: $dim; min-width: 64px; font-size: 11.5px; }
+.cli-cr-value { color: $cyan; font-size: 11.5px; }
+
+// ── Link rows ─────────────────────────────────
+.cli-link-row { display: flex; align-items: center; gap: 12px; margin: 3px 0; }
+.cli-lr-label { color: $dim; min-width: 72px; font-size: 11.5px; }
+.cli-lr-url   { color: $blue; font-size: 11.5px; text-decoration: underline; text-underline-offset: 2px; opacity: 0.8; }
+
+// ── Help rows ─────────────────────────────────
+.cli-cmd-row  { display: flex; align-items: center; gap: 4px; margin: 2px 0; }
+.cli-cr2-cmd  { color: $green; min-width: 80px; font-size: 12px; }
+.cli-cr2-dots { color: $dim; opacity: 0.25; letter-spacing: 2px; font-size: 10px; min-width: 44px; }
+.cli-cr2-desc { color: $mid; font-size: 11.5px; }
+
+// ── ls grid ───────────────────────────────────
+.cli-ls-grid  { display: flex; flex-wrap: wrap; gap: 4px 24px; padding: 4px 0; }
+.cli-ls-item  { font-size: 12px; color: $mid; &.dir { color: $blue; } }
+
+// ── Neofetch ──────────────────────────────────
+.cli-neo { display: flex; gap: 28px; padding: 4px 0; align-items: flex-start; }
+.cli-neo-logo { display: flex; flex-direction: column; gap: 1px; }
+.cli-neo-logo-line { color: $green; font-size: 13px; letter-spacing: 3px; opacity: 0.85; }
+.cli-neo-info { display: flex; flex-direction: column; gap: 3px; }
+.cli-neo-user { color: $green; font-weight: 600; font-size: 13px; }
+.cli-neo-sep  { color: $dim; opacity: 0.4; font-size: 11px; }
+.cli-neo-row  { display: flex; font-size: 12px; }
+.cli-neo-key  { color: $blue; min-width: 80px; font-weight: 500; }
+.cli-neo-colon{ color: $dim; }
+.cli-neo-val  { color: $mid; &.green { color: $green; } }
+
+// ── Para ──────────────────────────────────────
+.cli-para { color: $mid; font-size: 12px; line-height: 1.7; padding: 0 2px; }
+
+// ── Status messages ───────────────────────────
+.cli-success { color: $green;  font-size: 12px; padding: 2px 0; }
+.cli-warn    { color: $yellow; font-size: 12px; padding: 2px 0; }
+.cli-error   { color: $red;    font-size: 12px; padding: 2px 0; }
+.cli-dim     { color: $dim;    font-size: 12px; }
+.cli-text    { color: $text;   font-size: 12px; }
+
+// ── Color classes ─────────────────────────────
+.cli-c-green  { color: $green !important; }
+.cli-c-blue   { color: $blue  !important; }
+.cli-c-yellow { color: $yellow!important; }
+.cli-c-purple { color: $purple!important; }
+.cli-c-pink   { color: $pink  !important; }
+.cli-c-red    { color: $red   !important; }
+.cli-c-cyan   { color: $cyan  !important; }
