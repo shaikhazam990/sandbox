@@ -1,0 +1,161 @@
+// ─────────────────────────────────────────────
+//  Finder Window — finder.scss
+// ─────────────────────────────────────────────
+
+.finder-root {
+  display: flex;
+  height: 100%;
+  background: #0e0e11;
+  color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', Inter, sans-serif;
+  overflow: hidden;
+}
+
+// ── Sidebar ───────────────────────────────────
+.finder-sidebar {
+  width: 190px;
+  flex-shrink: 0;
+  background: rgba(0,0,0,0.25);
+  border-right: 1px solid rgba(255,255,255,0.07);
+  padding: 16px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar { width: 4px; }
+  &::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+}
+
+.finder-sidebar-section-label {
+  font-size: 10px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.28);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0 16px 8px;
+}
+
+.finder-sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 8px 16px;
+  background: transparent;
+  border: none;
+  color: rgba(255,255,255,0.72);
+  cursor: pointer;
+  font-size: 13px;
+  font-family: inherit;
+  text-align: left;
+  width: 100%;
+  transition: background 0.15s, color 0.12s;
+  border-radius: 0;
+  position: relative;
+
+  &:hover {
+    background: rgba(255,255,255,0.07);
+    color: #fff;
+  }
+
+  // ── Active / selected state ──
+  &--active,
+  &--active:hover {
+    background: rgba(255,255,255,0.09);
+    color: #fff;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 5px;
+      bottom: 5px;
+      width: 3px;
+      background: #60a5fa;
+      border-radius: 0 2px 2px 0;
+    }
+  }
+}
+
+// ── App grid ──────────────────────────────────
+.finder-grid {
+  flex: 1;
+  padding: 24px;
+  overflow-y: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 14px;
+  align-content: start;
+
+  &::-webkit-scrollbar { width: 5px; }
+  &::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
+}
+
+.finder-app-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 9px;
+  padding: 14px 8px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 14px;
+  transition: background 0.15s, transform 0.12s;
+
+  &:hover {
+    background: rgba(255,255,255,0.07);
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    background: rgba(255,255,255,0.12);
+    transform: scale(0.96);
+  }
+
+  // ── Selected state ──
+  &--selected {
+    background: rgba(96, 165, 250, 0.12);
+    outline: 1.5px solid rgba(96, 165, 250, 0.3);
+    border-radius: 14px;
+
+    .finder-app-label {
+      color: #fff;
+    }
+  }
+}
+
+.finder-app-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.35);
+  position: relative;
+  transition: box-shadow 0.2s, transform 0.15s;
+
+  .finder-app-item:hover & {
+    box-shadow: 0 8px 22px rgba(0,0,0,0.45);
+    transform: scale(1.05);
+  }
+
+  // Glossy shine
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(175deg, rgba(255,255,255,0.22) 0%, rgba(255,255,255,0) 50%);
+    border-radius: inherit;
+    pointer-events: none;
+  }
+}
+
+.finder-app-label {
+  font-size: 12px;
+  color: rgba(255,255,255,0.8);
+  text-align: center;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  line-height: 1.3;
+}

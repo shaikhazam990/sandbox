@@ -1,0 +1,218 @@
+// ─────────────────────────────────────────────
+//  MacWindow — window.scss
+// ─────────────────────────────────────────────
+
+.mac-window {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  background: #0e0e11;
+  border-radius: 12px;
+  overflow: hidden;
+
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow:
+    0 0 0 0.5px rgba(0, 0, 0, 0.8),
+    0 32px 80px rgba(0, 0, 0, 0.75),
+    0 8px 24px  rgba(0, 0, 0, 0.5);
+
+  // ── Enter ──
+  animation: windowOpen 0.25s cubic-bezier(0.34, 1.5, 0.64, 1) both;
+
+  // ── Close ──
+  &.is-closing {
+    animation: windowClose 0.2s cubic-bezier(0.4, 0, 1, 1) forwards;
+    pointer-events: none;
+  }
+
+  // ── Focused vs blurred ──
+  &.is-focused {
+    border-color: rgba(255, 255, 255, 0.12);
+    box-shadow:
+      0 0 0 0.5px rgba(0, 0, 0, 0.8),
+      0 32px 80px rgba(0, 0, 0, 0.75),
+      0 8px 24px  rgba(0, 0, 0, 0.5);
+
+    .window-nav { background: #1c1c20; }
+    .dot-red    { background: #ff5f57; }
+    .dot-yellow { background: #febc2e; }
+    .dot-green  { background: #28c840; }
+  }
+
+  &.is-blurred {
+    border-color: rgba(255, 255, 255, 0.05);
+    box-shadow:
+      0 0 0 0.5px rgba(0, 0, 0, 0.6),
+      0 16px 40px rgba(0, 0, 0, 0.5);
+
+    .window-nav { background: #141416; }
+
+    // Greyed out dots when unfocused — just like real macOS
+    .dot-red    { background: #5a5a5c; }
+    .dot-yellow { background: #5a5a5c; }
+    .dot-green  { background: #5a5a5c; }
+
+    .window-title { color: rgba(255, 255, 255, 0.25); }
+  }
+
+  // ── Minimized ──
+  &.is-minimized {
+    .window-body {
+      height: 0 !important;
+      overflow: hidden;
+      opacity: 0;
+      pointer-events: none;
+    }
+    border-radius: 10px;
+  }
+
+  // ── Maximized ──
+  &.is-maximized {
+    border-radius: 0;
+    border: none;
+    .window-nav { border-radius: 0; }
+  }
+
+  // ── Transitions ──
+  .window-body {
+    transition: height 0.25s ease, opacity 0.2s ease;
+    opacity: 1;
+  }
+
+  .window-nav,
+  .dot-red,
+  .dot-yellow,
+  .dot-green,
+  .window-title {
+    transition: background 0.25s ease, color 0.25s ease;
+  }
+}
+
+// ── Title bar ─────────────────────────────────
+.window-nav {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  padding: 11px 14px;
+  background: #1c1c20;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  flex-shrink: 0;
+  cursor: grab;
+  user-select: none;
+
+  &:active { cursor: grabbing; }
+}
+
+// ── Traffic dots ──────────────────────────────
+.window-dots {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.dot {
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: filter 0.15s, transform 0.1s;
+  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.25);
+
+  &:hover  { filter: brightness(1.2); transform: scale(1.15); }
+  &:active { transform: scale(0.88); }
+
+  .dot-icon {
+    font-size: 7px;
+    font-weight: 900;
+    color: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    line-height: 1;
+  }
+}
+
+.dot-red    { background: #ff5f57; }
+.dot-yellow { background: #febc2e; }
+.dot-green  { background: #28c840; }
+
+// ── Window title ──────────────────────────────
+.window-title {
+  flex: 1;
+  text-align: center;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 0.01em;
+  pointer-events: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.window-title-spacer {
+  width: 53px; // mirrors dots width for centering
+  flex-shrink: 0;
+}
+
+// ── Content area ──────────────────────────────
+.window-body {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+// ── Resize corner hints ───────────────────────
+.resize-corner {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  opacity: 0;
+  transition: opacity 0.2s;
+  pointer-events: none;
+  z-index: 10;
+
+  &.tl { top: 0;    left: 0;  border-top: 2px solid rgba(255,255,255,0.08); border-left: 2px solid rgba(255,255,255,0.08);   border-radius: 12px 0 0 0; }
+  &.tr { top: 0;    right: 0; border-top: 2px solid rgba(255,255,255,0.08); border-right: 2px solid rgba(255,255,255,0.08);  border-radius: 0 12px 0 0; }
+  &.bl { bottom: 0; left: 0;  border-bottom: 2px solid rgba(255,255,255,0.08); border-left: 2px solid rgba(255,255,255,0.08); border-radius: 0 0 0 12px; }
+  &.br { bottom: 0; right: 0; border-bottom: 2px solid rgba(255,255,255,0.08); border-right: 2px solid rgba(255,255,255,0.08); border-radius: 0 0 12px 0; }
+}
+
+.mac-window:hover .resize-corner { opacity: 1; }
+
+// ── Scrollbars inside windows ─────────────────
+.mac-window *::-webkit-scrollbar       { width: 5px; }
+.mac-window *::-webkit-scrollbar-track { background: transparent; }
+.mac-window *::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  &:hover { background: rgba(255, 255, 255, 0.2); }
+}
+
+// ── Animations ────────────────────────────────
+@keyframes windowOpen {
+  from { opacity: 0; transform: scale(0.9) translateY(8px); }
+  to   { opacity: 1; transform: scale(1)   translateY(0);   }
+}
+
+@keyframes windowClose {
+  from { opacity: 1; transform: scale(1)    translateY(0);   }
+  to   { opacity: 0; transform: scale(0.88) translateY(4px); }
+}
+
+
+
