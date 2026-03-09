@@ -1,0 +1,372 @@
+// ─────────────────────────────────────────────
+//  System Preferences — setting.scss
+// ─────────────────────────────────────────────
+
+.sp-root {
+  display: flex;
+  height: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+  overflow: hidden;
+  background: #1c1c1e;
+}
+
+// ── Sidebar ───────────────────────────────────
+.sp-sidebar {
+  width: 200px;
+  min-width: 200px;
+  background: #111113;
+  border-right: 1px solid rgba(255,255,255,0.07);
+  display: flex;
+  flex-direction: column;
+  padding: 24px 0 16px;
+}
+
+.sp-avatar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 16px 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  margin-bottom: 12px;
+}
+
+.sp-avatar-ring {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  padding: 2px;
+  margin-bottom: 10px;
+}
+
+.sp-avatar-inner {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: #1c1c1e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.sp-avatar-name {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+}
+
+.sp-avatar-role {
+  margin: 3px 0 0;
+  font-size: 11px;
+  color: rgba(255,255,255,0.4);
+  text-align: center;
+}
+
+.sp-nav {
+  list-style: none;
+  margin: 0;
+  padding: 0 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.sp-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.6);
+  transition: background 0.15s, color 0.15s;
+  user-select: none;
+
+  &:hover {
+    background: rgba(255,255,255,0.06);
+    color: rgba(255,255,255,0.85);
+  }
+
+  &.active {
+    background: rgba(59,130,246,0.18);
+    color: #60a5fa;
+  }
+}
+
+.sp-nav-icon { font-size: 16px; line-height: 1; }
+
+// ── Content ───────────────────────────────────
+.sp-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px 24px 32px;
+  background: #1c1c1e;
+
+  &::-webkit-scrollbar       { width: 5px; }
+  &::-webkit-scrollbar-track { background: transparent; }
+  &::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
+}
+
+.sp-panel { display: flex; flex-direction: column; gap: 14px; }
+
+.sp-panel-title {
+  margin: 0 0 4px;
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.3px;
+}
+
+.sp-sub-title {
+  margin: 6px 0 0;
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.35);
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+}
+
+// ── Info card ─────────────────────────────────
+.sp-info-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.sp-info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 11px 18px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  &:last-child { border-bottom: none; }
+}
+
+.sp-key {
+  font-size: 13px;
+  color: rgba(255,255,255,0.35);
+  font-weight: 500;
+}
+
+.sp-val {
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.85);
+  &.sp-green { color: #4ade80; }
+  &.sp-link  { color: #60a5fa; }
+}
+
+// ── Skills ────────────────────────────────────
+.sp-skills { display: flex; flex-direction: column; gap: 10px; }
+
+.sp-skill { display: flex; flex-direction: column; gap: 5px; }
+
+.sp-skill-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sp-skill-name { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.75); }
+.sp-skill-pct  { font-size: 11px; color: rgba(255,255,255,0.35); font-weight: 600; }
+
+.sp-skill-track {
+  height: 5px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.sp-skill-fill {
+  height: 100%;
+  border-radius: 99px;
+  transition: width 0.8s cubic-bezier(0.34, 1.2, 0.64, 1);
+}
+
+// ── Wallpaper preview ─────────────────────────
+.sp-wp-preview {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/6;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+
+  &:hover img { transform: scale(1.02); }
+}
+
+.sp-wp-preview-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.4) 0%, transparent 60%);
+  display: flex;
+  align-items: flex-end;
+  padding: 12px;
+}
+
+.sp-wp-badge {
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(8px);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.15);
+  letter-spacing: 0.3px;
+}
+
+// ── Category pills ────────────────────────────
+.sp-wp-categories {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.sp-cat-pill {
+  padding: 5px 14px;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.05);
+  color: rgba(255,255,255,0.55);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: inherit;
+
+  &:hover {
+    background: rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.85);
+  }
+
+  &.active {
+    background: #3b82f6;
+    border-color: #3b82f6;
+    color: #fff;
+  }
+}
+
+// ── Wallpaper grid ────────────────────────────
+.sp-wp-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.sp-wp-item {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: border-color 0.15s, transform 0.15s, box-shadow 0.15s;
+  aspect-ratio: 16/9;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.2s;
+  }
+
+  .sp-wp-info {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    background: linear-gradient(transparent, rgba(0,0,0,0.75));
+    padding: 16px 8px 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    opacity: 0;
+    transition: opacity 0.15s;
+  }
+
+  .sp-wp-name {
+    font-size: 10px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.2;
+  }
+
+  .sp-wp-cat {
+    font-size: 9px;
+    color: rgba(255,255,255,0.6);
+    font-weight: 500;
+    background: rgba(255,255,255,0.15);
+    padding: 1px 5px;
+    border-radius: 4px;
+  }
+
+  &:hover {
+    transform: scale(1.04);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+    img { transform: scale(1.06); }
+    .sp-wp-info { opacity: 1; }
+  }
+
+  &.active {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 1px #3b82f6, 0 6px 20px rgba(59,130,246,0.3);
+  }
+}
+
+.sp-wp-check {
+  position: absolute;
+  top: 6px; right: 6px;
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  background: #3b82f6;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(59,130,246,0.5);
+}
+
+// ── Connect links ─────────────────────────────
+.sp-links {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.sp-link-btn {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 10px 18px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  color: #fff;
+  transition: opacity 0.15s, transform 0.15s;
+
+  &:hover { opacity: 0.85; transform: translateY(-1px); }
+
+  span { font-size: 15px; }
+
+  &.sp-github   { background: linear-gradient(135deg, #333, #111); border: 1px solid rgba(255,255,255,0.1); }
+  &.sp-linkedin { background: linear-gradient(135deg, #0077b5, #005582); }
+  &.sp-mail     { background: linear-gradient(135deg, #3b82f6, #1d4ed8); }
+}

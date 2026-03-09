@@ -1,0 +1,151 @@
+// ─────────────────────────────────────────────
+//  Spotify Window — spotify.scss
+// ─────────────────────────────────────────────
+
+.sp-root {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  background: #0a0a0c;
+  overflow: hidden;
+}
+
+// ── Sidebar ───────────────────────────────────
+.sp-sidebar {
+  width: 150px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 16px 10px;
+  background: #0d0d10;
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+  gap: 4px;
+}
+
+.sp-sidebar-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 6px 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  margin-bottom: 8px;
+
+  span {
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.3px;
+  }
+}
+
+.sp-sidebar-label {
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.3);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0 6px 6px;
+}
+
+// ── Playlist tabs ─────────────────────────────
+.sp-tab {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 8px 8px;
+  border-radius: 8px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+  transition: background 0.15s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  &.active {
+    background: rgba(255, 255, 255, 0.08);
+
+    .sp-tab-name {
+      color: var(--accent);
+    }
+  }
+}
+
+.sp-tab-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  opacity: 0.85;
+}
+
+.sp-tab-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.sp-tab-name {
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.75);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color 0.15s;
+}
+
+.sp-tab-desc {
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.3);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// ── Sidebar footer ────────────────────────────
+.sp-sidebar-footer {
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.sp-open-link {
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 10.5px;
+  font-weight: 500;
+  color: #1db954;
+  text-decoration: none;
+  padding: 4px 6px;
+  display: block;
+  border-radius: 6px;
+  transition: background 0.15s;
+  letter-spacing: 0.01em;
+
+  &:hover {
+    background: rgba(29, 185, 84, 0.1);
+  }
+}
+
+// ── Player (iframe) ───────────────────────────
+.sp-player {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  overflow: hidden;
+
+  iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+  }
+}
